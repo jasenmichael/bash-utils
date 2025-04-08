@@ -2,7 +2,7 @@
 
 # ==============================================================================
 # Script: log.sh
-# URL: https://github.com/jasenmichael/bash-utils/bash-log.sh
+# URL: https://github.com/jasenmichael/bash-utils/blob/main/bash-log.sh
 # Description: A collection of utility functions for logging with colored output.
 # Author: jasenmichael
 # License: MIT License

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# =================================================================
+# ========================================================================
 # Script: bash-format.sh
-# URL: https://github.com/jasenmichael/bash-utils/bash-format.sh
+# URL: https://github.com/jasenmichael/bash-utils/blob/main/bash-format.sh
 # Description: Shell script formatter using shfmt
 # Author: jasenmichael
 # License: MIT License
@@ -10,7 +10,7 @@
 # Functions:
 # - install_shfmt: Installs shfmt formatter if not present
 # - format: Formats shell scripts using shfmt
-# =================================================================
+# ========================================================================
 SHFMT_PATH="${SHFMT_PATH:-$HOME/.local/bin/shfmt}"
 SHFMT_VERSION=${SHFMT_VERSION:-3.8.0}
 install_shfmt() {
