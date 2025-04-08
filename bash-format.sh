@@ -39,7 +39,7 @@ format() {
   # check if shfmt is installed
   if [ ! -f "$SHFMT_PATH" ]; then
     echo "shfmt is not installed. Run \`$0 --install\` to install."
-    exit 1
+    return 1
   fi
 
   [ -z "$1" ] && echo "Missing file or directory argument" && exit 1
@@ -56,7 +56,7 @@ format() {
     done < <(find "$1" -type f -name "*.sh")
   else
     echo "Error: $1 is not a file or directory"
-    exit 1
+    return 1
   fi
 }
 
