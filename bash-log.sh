@@ -38,7 +38,7 @@ log_warn() {
 }
 
 log_error() {
-  # local red='\033[0;31m'
+  # !! local red='\033[0;31m'
   local red='\033[41m'
   log "${red}[ERROR]\033[0m" "$@"
 }
