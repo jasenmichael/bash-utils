@@ -24,7 +24,7 @@ install_shfmt() {
   # !! shfmt configuration
   SHFMT_FILE="shfmt_v${SHFMT_VERSION}_linux_${ARCH}"
   SHFMT_URL="https://github.com/mvdan/sh/releases/download/v${SHFMT_VERSION}/${SHFMT_FILE}"
-  if [ ! -s "$SHFMT_PATH" ]; then
+  if [ ! -f "$SHFMT_PATH" ]; then
     echo "Downloading shfmt"
     if ! curl -L -o "$SHFMT_PATH" "$SHFMT_URL"; then
       rm -f "$SHFMT_PATH" >/dev/null 2>&1
@@ -36,28 +36,25 @@ install_shfmt() {
 }
 
 format() {
+  [ -z "$1" ] && echo "Missing file or directory argument" && exit 1
+
   # check if shfmt is installed
-  if [ ! -f "$SHFMT_PATH" ]; then
+  if command -v shfmt >/dev/null 2>&1; then
+    SHFMT_PATH=$(which shfmt)
+  elif [ ! -f "$SHFMT_PATH" ]; then
     echo "shfmt is not installed. Run \`$0 --install\` to install."
     return 1
   fi
 
-  [ -z "$1" ] && echo "Missing file or directory argument" && exit 1
-  shfmt() {
-    "$SHFMT_PATH" -i 2 -w "$1"
-  }
-  echo "Formatting $1"
   if [ -f "$1" ]; then
-    shfmt "$1"
+    echo "Formatting file: $1"
   elif [ -d "$1" ]; then
-    echo "Formatting all files in directory"
-    while IFS= read -r file; do
-      shfmt "$file"
-    done < <(find "$1" -type f -name "*.sh")
+    echo "Formatting directory: $1"
   else
     echo "Error: $1 is not a file or directory"
     return 1
   fi
+  "$SHFMT_PATH" -i 2 -w "$1"
 }
 
 # bash_builder_remove_after
